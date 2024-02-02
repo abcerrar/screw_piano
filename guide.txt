@@ -1,0 +1,29 @@
+TAREAS:
+	- Crear estructura tornillos
+	- Elegir salida de sonido con mas calidad
+
+EXTRAS:
+	- Biblioteca de sonidos
+	- ... (añade tu cosas)
+
+IDEAS PARA LA SALIDA DE SONIDO:
+	1. Utilizar un Módulo de Síntesis de Sonido o MIDI
+		Una de las mejores formas de generar sonidos de alta calidad es mediante el uso de un módulo de síntesis de sonido o un módulo MIDI externo. Arduino puede enviar señales MIDI a estos módulos usando su puerto serial o a través de interfaces MIDI específicas. Estos módulos pueden generar una amplia gama de sonidos y timbres, desde pianos hasta instrumentos de cuerda, viento, y más.
+			- Ventajas: Amplia gama de sonidos y alta calidad.
+			- Desventajas: Requiere hardware adicional y puede ser más costoso.
+			
+	2. DAC (Convertidor Digital-Analógico) y Generación de Sonido Compleja
+		Otra opción es utilizar un DAC externo conectado a tu Arduino para convertir señales digitales en analógicas. Esto te permitirá generar ondas sonoras más complejas que las que puede producir un zumbador. Puedes programar tu Arduino para crear ondas sinusoidales, cuadradas, diente de sierra, etc., y mezclarlas para crear diferentes timbres.
+			- Ventajas: Permite una generación de sonido más flexible y compleja.
+			- Desventajas: Requiere un entendimiento más profundo de la síntesis de sonido y programación.
+			
+	3. Uso de un Shield de Audio o Módulo MP3
+		Existen shields de audio y módulos MP3 para Arduino que te permiten reproducir archivos de sonido almacenados en una tarjeta SD. Puedes usar archivos de sonido de notas individuales o efectos sonoros y controlar la reproducción desde tu Arduino. Esto es particularmente útil si deseas reproducir sonidos grabados de alta calidad, como notas de piano reales.
+			- Ventajas: Calidad de sonido muy alta, posibilidad de reproducir grabaciones complejas.
+			- Desventajas: Menos interactividad en tiempo real en comparación con la síntesis de sonido.
+			
+	4. PWM (Modulación por Ancho de Pulso) para Síntesis Simple
+		Aunque limitado comparado con las otras opciones, puedes usar la salida PWM de Arduino para generar ondas sonoras más complejas que las posibles con un zumbador. Sin embargo, esto todavía no se compara con la calidad de un DAC o módulo de síntesis dedicado.
+			- Ventajas: No requiere hardware adicional; más versátil que un zumbador.
+			- Desventajas: Calidad de sonido y rango limitados.
+	Elige una y borra las de más
