@@ -1,4 +1,6 @@
-const int zumbador = 9;
+const int zumbador = 13;
+const int button_on = 2;
+const int keys[] = {3, 4, 5, 6, 7, 8, 9};
 //                 la   si    do   re  mi    fa   sol
 //                 A4    B4   C4   D4   E4   F4   G4
 int notas_base[] = {440, 494, 262, 294, 330, 349, 392};
@@ -30,22 +32,27 @@ int get_tempo(float bpm){
 
 void setup() {
   pinMode(zumbador, OUTPUT);
+  pinMode(button_on, INPUT);
+  for(int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++){
+  	pinMode(keys[i], INPUT);
+  }
+  
   Serial.begin(9600);
 
 }
 
 void play_melody(){
   char melody[][3] = {
-    "C4", "C4", "D4", "C4", "F4", "E4", "00",
-    "C4", "C4", "D4", "C4", "G4", "F4", "00", 
-    "C4", "C4", "C3", "A4", "F4", "E4", "D4", "00",
-    "a4", "a4", "A4", "F4", "G4", "F4"};
+    "C4", "C4", "D4", "C4", "F4", "E4", 
+    "00", "C4", "C4", "D4", "C4", "G4", "F4", 
+    "00", "C4", "C4", "C3", "A4", "F4", "E4", "D4",
+    "00", "a4", "a4", "A4", "F4", "G4", "F4"};
   float note_durations[] = {
     0.5, 0.5, 1, 1, 1, 1,
     1, 0.5, 0.5, 1, 1, 1, 1, 
     1, 0.5, 0.5, 1, 1, 1, 1, 1,
     1, 0.5, 0.5, 1, 1, 1, 1};
-  int tempo = 130; //tempo in bpm
+  int tempo = 120; //tempo in bpm
   int half = get_tempo(tempo);
   
 
@@ -60,7 +67,16 @@ void play_melody(){
 }
 
 void loop() {
-  if(digitalRead(2) == HIGH){
+  for(int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++){
+    if(digitalRead(keys[i]) == HIGH){
+    	//Serial.print("Has pulsado el boton: ");
+      	//Serial.println(i);
+      tone(zumbador, notas_base[i], 1000);
+      	delay(200);
+    }
+  }
+  
+  if(digitalRead(button_on) == HIGH){
   	digitalWrite(zumbador, HIGH);
     play_melody();
     delay(200);
