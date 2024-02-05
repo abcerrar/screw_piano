@@ -67,7 +67,7 @@ void play_melody(){
 
 void loop() {
 
-  long sensorValue = cs_2_4.capacitiveSensorRaw(300);
+  long sensorValue = cs_2_4.capacitiveSensorRaw(30);
   if (sensorValue > 0){
     Serial.println(sensorValue);
     if (sensorValue > 170)
