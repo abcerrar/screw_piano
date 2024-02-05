@@ -1,6 +1,8 @@
+#include <CapacitiveSensor.h>
+
 const int zumbador = 13;
 const int button_on = 2;
-const int keys[] = {3, 4, 5, 6, 7, 8, 9};
+CapacitiveSensor cs_2_4 = CapacitiveSensor(5, 3);
 //                 la   si    do   re  mi    fa   sol
 //                 A4    B4   C4   D4   E4   F4   G4
 int notas_base[] = {440, 494, 262, 294, 330, 349, 392};
@@ -33,9 +35,6 @@ int get_tempo(float bpm){
 void setup() {
   pinMode(zumbador, OUTPUT);
   pinMode(button_on, INPUT);
-  for(int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++){
-  	pinMode(keys[i], INPUT);
-  }
   
   Serial.begin(9600);
 
@@ -67,14 +66,17 @@ void play_melody(){
 }
 
 void loop() {
-  for(int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++){
-    if(digitalRead(keys[i]) == HIGH){
-    	//Serial.print("Has pulsado el boton: ");
-      	//Serial.println(i);
-      tone(zumbador, notas_base[i], 1000);
-      	delay(200);
-    }
+
+  long sensorValue = cs_2_4.capacitiveSensorRaw(300);
+  if (sensorValue > 0){
+    Serial.println(sensorValue);
+    if (sensorValue > 170)
+      tone(zumbador, notas_base[0], 1000);
+    else
+      tone(zumbador, notas_base[4], 1000);
+    
   }
+
   
   if(digitalRead(button_on) == HIGH){
   	digitalWrite(zumbador, HIGH);
